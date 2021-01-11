@@ -3,21 +3,22 @@ import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import{ bindActionCreators } from 'redux';
 import { fetchUser } from '../redux/actions/index';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {MaterialCommunityIcons} from 'react-native-vector-icons';
 import FeedScreen from './Main/Feed';
 import ProfileScreen from './Main/Profile';
 import AddScreen from './Main/Add'
 
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export class Main extends Component {
     componentDidMount(){
         this.props.fetchUser();
     }
     render() {
+        function MyTabs() {
         return (
         <Tab.Navigator>
             <Tab.Screen name="Feed" component={FeedScreen} 
@@ -48,6 +49,7 @@ export class Main extends Component {
         </Tab.Navigator>
         )
     }
+}
 }
 
 const mapStateToProps = (store) => ({

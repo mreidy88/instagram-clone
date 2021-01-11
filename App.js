@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import LandingScreen from './Components/Auth/Landing';
 import RegisterScreen from './Components/Auth/Register';
 import LoginScreen from './Components/Auth/Login';
@@ -21,8 +22,10 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 
 // For firebase JS SDK v7.20.0 and later, measurementId is optional
 
+const Api_Key = process.env.REACT_APP_API_KEY;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCltKUa7EMcaadri0C6r32PwGhSZWFHVPQ",
+  apiKey: {Api_Key},
   authDomain: "instagram-clone-267e4.firebaseapp.com",
   projectId: "instagram-clone-267e4",
   storageBucket: "instagram-clone-267e4.appspot.com",
@@ -30,6 +33,7 @@ const firebaseConfig = {
   appId: "1:688232540986:web:da856cca92ea175e4bbe03",
   measurementId: "G-8YQG3RVT9L"
 };
+
 
 if(firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig)
@@ -41,28 +45,31 @@ export class App extends Component {
     super(props);
     this.state = {
       loaded: false,
+      mounted: false,
+      data: []
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
-      if(!user){
+      if (!user) {
         this.setState({
           loggedIn: false,
           loaded: true,
         })
-      }else {
+      } else {
         this.setState({
           loggedIn: true,
           loaded: true,
         })
-      }
+      }   
     })
+    
   }
   render() {
     const { loggedIn, loaded } = this.state;
     if(!loaded){
-      return(
+      return (
         <View style = {{ flex: 1, justifyContent: 'center'}}>
           <Text>
             Loading
@@ -81,7 +88,7 @@ export class App extends Component {
         </NavigationContainer>
       );
     }
-    return(
+    return (
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
