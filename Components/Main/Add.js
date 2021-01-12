@@ -32,10 +32,10 @@ export default function Add({ navigation }) {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: false,
       aspect: [1, 1],
-      quality: 1,
+      quality: undefined,
     });
     console.log(result);
 

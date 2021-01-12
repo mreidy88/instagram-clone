@@ -14,6 +14,7 @@ import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
 import MainScreen from './Components/Main';
 import AddScreen from './Components/Main/Add';
+import SaveScreen from './Components/Main/Save';
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -40,13 +41,13 @@ if(firebase.apps.length === 0){
 };
 
 const Stack = createStackNavigator();
+
+
 export class App extends Component {
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super()
     this.state = {
       loaded: false,
-      mounted: false,
-      data: []
     }
   }
 
@@ -62,42 +63,44 @@ export class App extends Component {
           loggedIn: true,
           loaded: true,
         })
-      }   
+      }
     })
-    
   }
   render() {
     const { loggedIn, loaded } = this.state;
-    if(!loaded){
+    if (!loaded) {
       return (
-        <View style = {{ flex: 1, justifyContent: 'center'}}>
-          <Text>
-            Loading
-          </Text>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <Text>Loading</Text>
         </View>
       )
     }
-    if(!loggedIn){
+
+    if (!loggedIn) {
       return (
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
-            <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name="Register" component={RegisterScreen}/>
-            <Stack.Screen name="Login" component={LoginScreen}/>
+            <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );
     }
+
     return (
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer >
           <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name="Add" component={AddScreen}/>
+            <Stack.Screen name="Main" component={MainScreen} />
+            <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation}/>
+            <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation}/>
+            {/* <Stack.Screen name="Comment" component={CommentScreen} navigation={this.props.navigation}/> */}
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
     )
-}}
+  }
+}
 
-export default App;
+export default App
