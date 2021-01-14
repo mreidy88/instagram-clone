@@ -74,7 +74,6 @@ function Profile(props) {
     const onLogout = () => {
         firebase.auth().signOut();
     }
-
     if (user === null) {
         return <View />
     }
