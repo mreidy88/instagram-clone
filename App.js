@@ -5,17 +5,17 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import LandingScreen from './Components/Auth/Landing';
-import RegisterScreen from './Components/Auth/Register';
-import LoginScreen from './Components/Auth/Login';
+import LandingScreen from './frontend/Components/Auth/Landing';
+import RegisterScreen from './frontend/Components/Auth/Register';
+import LoginScreen from './frontend/Components/Auth/Login';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './redux/reducers';
+import rootReducer from './frontend/Components/redux/reducers';
 import thunk from 'redux-thunk';
-import MainScreen from './Components/Main';
-import AddScreen from './Components/Main/Add';
-import SaveScreen from './Components/Main/Save';
-import Comments from './Components/Main/Comment';
+import MainScreen from './frontend/Components/Main';
+import AddScreen from './frontend/Components/Main/Add';
+import SaveScreen from './frontend/Components/Main/Save';
+import Comments from './frontend/Components/Main/Comment';
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

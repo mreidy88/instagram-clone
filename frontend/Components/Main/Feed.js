@@ -13,7 +13,7 @@ function Feed(props) {
             })
             setPosts(props.feed);
         }
-        console.log(posts)
+        // console.log(posts)
     }, [props.usersFollowingLoaded, props.feed])
     const onLikePress = (userId, postId) => {
         firebase.firestore()
@@ -97,8 +97,7 @@ const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     following: store.userState.following,
     feed: store.usersState.feed,
-    users: store.usersState.users,
-    usersLoaded: store.usersState.usersLoaded,
+    // usersLoaded: store.usersState.usersLoaded,
     usersFollowingLoaded: store.usersState.usersFollowingLoaded,
 })
 export default connect(mapStateToProps, null)(Feed);
