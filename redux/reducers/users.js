@@ -1,9 +1,10 @@
 import { ActionSheetIOS } from "react-native"
-import { USERS_POSTS_STATE_CHANGE, USERS_DATA_STATE_CHANGE } from "../constants"
+import { USERS_POSTS_STATE_CHANGE, USERS_DATA_STATE_CHANGE, CLEAR_DATA } from "../constants"
 import { USERS_POSTS_STATE_CHANGE} from "../constants"
 
 const initialState = {
     users: [],
+    feed: [],
     userLoaded: 0,
 }
 
@@ -23,7 +24,11 @@ export const users = ( state = initialState, action ) => {
                     user
                     )
             }
-        
+        case CLEAR_DATA:
+            return {
+                users: [],
+                usersLoaded: 0
+                }
         default: 
             return {
                 ...state

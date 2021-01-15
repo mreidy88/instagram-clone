@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import{ bindActionCreators } from 'redux';
-import { fetchUser, fetchUserPosts } from '../redux/actions/index';
+import { fetchUser, fetchUserPosts, fetchUserFollowing, clearData } from '../redux/actions/index';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import {MaterialCommunityIcons} from 'react-native-vector-icons';
 import FeedScreen from './Main/Feed';
@@ -18,6 +18,9 @@ const Tab = createMaterialBottomTabNavigator();
 export class Main extends Component {
     componentDidMount(){
         this.props.fetchUser();
+        this.props.fetchUserPosts();
+        this.props.fetchUserFollowing();
+        this.props.clearData();
     }
     render() {
         function MyTabs() {
@@ -70,6 +73,6 @@ const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
 })
 
-const mapDispatchProps = ( dispatch ) => bindActionCreators({ fetchUser, fetchUserPosts }, dispatch)
+const mapDispatchProps = ( dispatch ) => bindActionCreators({ fetchUser, fetchUserPosts, fetchUserFollowing, clearData }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
