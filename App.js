@@ -15,6 +15,7 @@ import thunk from 'redux-thunk';
 import MainScreen from './Components/Main';
 import AddScreen from './Components/Main/Add';
 import SaveScreen from './Components/Main/Save';
+import Comments from './Components/Main/Comment';
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -95,7 +96,7 @@ export class App extends Component {
             <Stack.Screen name="Main" component={MainScreen} />
             <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation}/>
             <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation}/>
-            {/* <Stack.Screen name="Comment" component={CommentScreen} navigation={this.props.navigation}/> */}
+            <Stack.Screen name="Comment" component={Comments} navigation={this.props.navigation}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
